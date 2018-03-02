@@ -260,12 +260,11 @@ namespace Sitecore.Support.Workflows
     public void ResetWorkflowState(Item item, bool allVersions)
     {
       Error.AssertObject(item, "item");
-      foreach (Item item2 in item.Versions.GetVersions(true))
+      foreach (Item version in item.Versions.GetVersions(true))
       {
-        ResetWorkflowState(item2);
-      }
-
-      ResetWorkflowStateChildren(item, allVersions);
+        ResetWorkflowState(version);
+        ResetWorkflowStateChildren(version, allVersions);
+      }     
     }
 
     public void ResetWorkflowStateChildren(Item root, bool allVersions)
