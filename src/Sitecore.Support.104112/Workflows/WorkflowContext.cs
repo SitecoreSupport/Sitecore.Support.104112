@@ -272,7 +272,10 @@ namespace Sitecore.Support.Workflows
       if (!root.HasChildren) return;
       foreach (Item child in root.Children)
       {
-        ResetWorkflowState(child);
+        foreach (var version in child.Versions.GetVersions(true))
+        {
+          ResetWorkflowState(version);
+        }
         if (child.HasChildren)
         {
           ResetWorkflowStateChildren(child, allVersions);
